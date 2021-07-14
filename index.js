@@ -67,17 +67,19 @@ let path = new THREE.CatmullRomCurve3(points);
 let geometry = new THREE.TubeGeometry( path, 300, 4, 32, true );
 //Basic material
 
-let tubeTexture = new THREE.MeshLambertMaterial({
+let tubeTexture = new THREE.MeshBasicMaterial({
   map: new THREE.TextureLoader().load('galaxyTexture.jpg'),
   side : THREE.BackSide
 });
+
+
+
+
 
 //Create a mesh
 var tube = new THREE.Mesh( geometry,  tubeTexture);
 //Add tube into the scene
 scene.add( tube );
-
-
 
 
 
@@ -131,6 +133,8 @@ scene.add( tube );
         cube.material.color.set('red');
       }
     }
+
+
 
     
 
