@@ -120,7 +120,7 @@ scene.add( tube );
       const target = new THREE.Vector3(0, 0, -distanceFromCamera);
       target.applyMatrix4(camera.matrixWorld);    
     
-      const moveSpeed = 35;  // units per second
+      const moveSpeed = 1000;  // units per second
       const distance = cube.position.distanceTo(target);
       if (distance > 0) {
         const amount = Math.min(moveSpeed * deltaTime, distance) / distance;
