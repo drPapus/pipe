@@ -68,11 +68,12 @@ let geometry = new THREE.TubeGeometry( path, 300, 4, 32, true );
 //Basic material
 
 let tubeTexture = new THREE.MeshLambertMaterial({
-  color:0xf00fff,
+  map: new THREE.TextureLoader().load('galaxyTexture.jpg'),
   side : THREE.BackSide
 });
+
 //Create a mesh
-var tube = new THREE.Mesh( geometry, tubeTexture );
+var tube = new THREE.Mesh( geometry,  tubeTexture);
 //Add tube into the scene
 scene.add( tube );
 
