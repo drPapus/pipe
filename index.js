@@ -73,11 +73,14 @@ let tubeTexture = new THREE.MeshBasicMaterial({
 });
 
 
+tubeTexture.map.wrapS = THREE.MirroredRepeatWrapping;
+tubeTexture.map.wrapT = THREE.MirroredRepeatWrapping;
+tubeTexture.map.repeat.set( 30, 4 );
 
 
 
 //Create a mesh
-var tube = new THREE.Mesh( geometry,  tubeTexture);
+let tube = new THREE.Mesh( geometry,  tubeTexture);
 //Add tube into the scene
 scene.add( tube );
 
