@@ -28,9 +28,9 @@ function main() {
 
   //Helpers
 
-  const gridHelper = new THREE.GridHelper(100, 10);
-  scene.add(gridHelper);
-  gridHelper.position.set(0, -5, 0);
+  // const gridHelper = new THREE.GridHelper(100, 10);
+  // scene.add(gridHelper);
+  // gridHelper.position.set(0, -5, 0);
 
 
   const loader = new THREE.GLTFLoader();
