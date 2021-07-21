@@ -32,6 +32,20 @@ function main() {
   scene.add(gridHelper);
   gridHelper.position.set(0, -5, 0);
 
+
+  const loader = new THREE.GLTFLoader();
+
+  loader.load( 'sculpt.glb', function ( gltf ) {
+
+    scene.add( gltf.scene );
+  
+  }, undefined, function ( error ) {
+  
+    console.error( error );
+  
+  } );
+
+
   const cube = new THREE.Mesh(
      new THREE.BoxBufferGeometry(0.3, 0.3, 0.3),
      new THREE.MeshPhongMaterial({color: 'red'}),
@@ -54,17 +68,18 @@ var points = [
 
 //Convert the array of points into vertices
 for (var i = 0; i < points.length; i++) {
-  var x = points[i][0];
+  var y = points[i][0];
   //We set a random value for the Y axis
-  var y = (Math.random()-0.5)*250;
+  //var x = (Math.random()-0.5)*25;
+  var x = points[i][0];
   var z = points[i][1];
   points[i] = new THREE.Vector3(x, y, z);
 }
 //Create a path from the points
-let path = new THREE.CatmullRomCurve3(points);
+let path = new THREE.Curves.GrannyKnot(points);
 
 //Create the tube geometry from the path
-let geometry = new THREE.TubeGeometry( path, 300, 4, 32, true );
+let geometry = new THREE.TubeGeometry( path, 100, 3, 32, true );
 //Basic material
 
 let tubeTexture = new THREE.MeshBasicMaterial({
