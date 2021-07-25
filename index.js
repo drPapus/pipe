@@ -1,3 +1,5 @@
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
+
 function main() {
   const canvas = document.querySelector('#bg');
   const renderer = new THREE.WebGLRenderer({canvas});
@@ -16,16 +18,18 @@ function main() {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('lightblue');
 
-  {
+   //Light
+
+
+   function addLight(...pos) {
     const color = 0xFFFFFF;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 10, 0);
-    light.target.position.set(-5, 0, 0);
+    light.position.set(...pos);
     scene.add(light);
-    scene.add(light.target);
-  }
-
+    }
+    addLight(-1, 2, 4);
+    addLight( 1, -1, -2);
   //Helpers
 
   // const gridHelper = new THREE.GridHelper(100, 10);
@@ -33,23 +37,28 @@ function main() {
   // gridHelper.position.set(0, -5, 0);
 
 
-  const loader = new THREE.GLTFLoader();
+  // const loader = new THREE.GLTFLoader();
 
-  loader.load( 'sculpt.glb', function ( gltf ) {
-
-    scene.add( gltf.scene );
+  // loader.load( 'img/Robot.glb', function ( Robot ) {
+    
+  //   let mesh = Robot.scene;
+  //   mesh.scale.set( 0.3, 0.3, 0.3 );
+  //   scene.add( mesh );
+  //   //scene.add( Robot.scene );
   
-  }, undefined, function ( error ) {
+  // }, undefined, function ( error ) {
   
-    console.error( error );
+  //   console.error( error );
   
-  } );
+  // } );
 
 
   const cube = new THREE.Mesh(
-     new THREE.BoxBufferGeometry(0.3, 0.3, 0.3),
+     new THREE.BoxBufferGeometry(0.3, 1, 0.3),
      new THREE.MeshPhongMaterial({color: 'red'}),
   );
+
+
   scene.add(cube);
 
 
@@ -83,7 +92,7 @@ let geometry = new THREE.TubeGeometry( path, 100, 3, 32, true );
 //Basic material
 
 let tubeTexture = new THREE.MeshBasicMaterial({
-  map: new THREE.TextureLoader().load('galaxyTexture.jpg'),
+  map: new THREE.TextureLoader().load('img/galaxyTexture.jpg'),
   side : THREE.BackSide
 });
 
@@ -126,8 +135,8 @@ scene.add( tube );
       camera.updateProjectionMatrix();
     }
     
-    cube.rotation.x = now;
-    cube.rotation.y = now * 1.1;
+    // cube.rotation.x = now;
+    // cube.rotation.y = now * 1.1;
 
     percentage += 0.0003;
     var p1 = path.getPointAt(percentage%1);
@@ -137,7 +146,7 @@ scene.add( tube );
     
     // move cube in front of camera
     {
-      const distanceFromCamera = 3;  // 3 units
+      const distanceFromCamera = 2;  // 3 units
       const target = new THREE.Vector3(0, 0, -distanceFromCamera);
       target.applyMatrix4(camera.matrixWorld);    
     
@@ -146,9 +155,9 @@ scene.add( tube );
       if (distance > 0) {
         const amount = Math.min(moveSpeed * deltaTime, distance) / distance;
         cube.position.lerp(target, amount);
-        cube.material.color.set('green');
+       // cube.material.color.set('green');
       } else {
-        cube.material.color.set('red');
+       // cube.material.color.set('red');
       }
     }
 
